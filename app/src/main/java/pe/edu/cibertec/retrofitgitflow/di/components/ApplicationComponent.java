@@ -13,6 +13,7 @@ import dagger.Component;
 import io.reactivex.Scheduler;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import pe.edu.cibertec.retrofitgitflow.data.repository.IPostFirestoreRepository;
 import pe.edu.cibertec.retrofitgitflow.data.repository.IPostRepository;
 import pe.edu.cibertec.retrofitgitflow.di.modules.ApplicationModule;
 import pe.edu.cibertec.retrofitgitflow.network.JsonPlaceHolderApi;
@@ -28,6 +29,8 @@ public interface ApplicationComponent {
     JsonPlaceHolderApi exposeJsonPlaceHolderApi();
     FirebaseAuth exposeFirebaseAuth();
     IPostRepository exposePostRepository();
+    IPostFirestoreRepository exposeFirestoreRepository();
+
 
     @Named("ui_thread") Scheduler uiThread();
     @Named("executor_thread") Scheduler executorThread();

@@ -16,7 +16,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import pe.edu.cibertec.retrofitgitflow.data.repository.IPostFirestoreRepository;
 import pe.edu.cibertec.retrofitgitflow.data.repository.IPostRepository;
+import pe.edu.cibertec.retrofitgitflow.data.repository.impl.PostFirestoreRepositoryImpl;
 import pe.edu.cibertec.retrofitgitflow.data.repository.impl.PostRepositoryImpl;
 import pe.edu.cibertec.retrofitgitflow.network.JsonPlaceHolderApi;
 import retrofit2.Retrofit;
@@ -105,5 +107,11 @@ public class ApplicationModule {
     @Singleton
     IPostRepository providePostRepository(PostRepositoryImpl postRepositoryImpl){
         return postRepositoryImpl;
+    }
+
+    @Provides
+    @Singleton
+    IPostFirestoreRepository providePostFirestoreRepository(PostFirestoreRepositoryImpl repository){
+        return repository;
     }
 }

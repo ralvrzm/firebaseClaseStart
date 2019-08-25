@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "144508561505",
+    "firebase_url": "https://clasefirebaseram2508.firebaseio.com",
+    "project_id": "clasefirebaseram2508",
+    "storage_bucket": "clasefirebaseram2508.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:144508561505:android:50b3ee633cc04e5b",
+        "android_client_info": {
+          "package_name": "pe.edu.cibertec.retrofitgitflow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "144508561505-v6t46poqcet5hrag54uils2c5ethpnd1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARnyVd1su91P2b5DWq5KfJPpDt7c8c4Rw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "144508561505-v6t46poqcet5hrag54uils2c5ethpnd1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
