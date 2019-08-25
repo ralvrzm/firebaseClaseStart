@@ -1,16 +1,19 @@
-package pe.edu.cibertec.retrofitgitflow.presentation.activities.login;
+    package pe.edu.cibertec.retrofitgitflow.presentation.activities.login;
 
 import android.text.TextUtils;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import javax.inject.Inject;
 
 public class LoginPresenter implements ILoginContract.IPresenter {
 
     private ILoginContract.IView view;
+    private final FirebaseAuth firebaseAuth;
 
     @Inject
-    public LoginPresenter() {
-
+    public LoginPresenter(FirebaseAuth firebaseAuth) {
+        this.firebaseAuth = firebaseAuth;
     }
 
 
@@ -31,7 +34,9 @@ public class LoginPresenter implements ILoginContract.IPresenter {
 
     @Override
     public void checkUserLogged() {
-
+        if (firebaseAuth.getCurrentUser() != null && isViewAttached()){
+            view.goToMenu();
+        }
     }
 
     @Override
@@ -40,7 +45,17 @@ public class LoginPresenter implements ILoginContract.IPresenter {
             if(isViewAttached()) view.showError("No deje los campos vacios");
         } else {
             if(isViewAttached()) view.showProgressDialog();
-
+            firebaseAuth.signInWithEmailAndPassword(username, password)
+                    .addOnCompleteListener(task -> {
+                        if (isViewAttached()) {
+                            view.hideProgressDialog();
+                            if (task.isSuccessful() && task.getResult() != null) {
+                                view.goToMenu();
+                            } else {
+                                view.showError(task.getException().getMessage());
+                            }
+                        }
+                    });
         }
     }
 }
