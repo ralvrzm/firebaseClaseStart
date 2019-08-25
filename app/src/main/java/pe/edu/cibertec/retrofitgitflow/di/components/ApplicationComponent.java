@@ -4,6 +4,7 @@ package pe.edu.cibertec.retrofitgitflow.di.components;
 import android.content.Context;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import javax.inject.Named;
@@ -30,7 +31,7 @@ public interface ApplicationComponent {
     FirebaseAuth exposeFirebaseAuth();
     IPostRepository exposePostRepository();
     IPostFirestoreRepository exposeFirestoreRepository();
-
+    FirebaseStorage exposeFirebaseStorage();
 
     @Named("ui_thread") Scheduler uiThread();
     @Named("executor_thread") Scheduler executorThread();

@@ -12,4 +12,6 @@ public interface IPostRepository {
     Observable<List<Post>> getPosts();
 
     Observable<PostDetail> getPostDetail(int postId);
+
+
 }
