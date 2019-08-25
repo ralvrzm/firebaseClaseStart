@@ -5,6 +5,7 @@ import javax.inject.Named;
 import dagger.Module;
 import dagger.Provides;
 import io.reactivex.Scheduler;
+import pe.edu.cibertec.retrofitgitflow.data.repository.IPostRepository;
 import pe.edu.cibertec.retrofitgitflow.di.scope.PerActivity;
 import pe.edu.cibertec.retrofitgitflow.domain.main_interactor.IMainInteractor;
 import pe.edu.cibertec.retrofitgitflow.domain.main_interactor.MainInteractorImpl;
@@ -18,23 +19,19 @@ public class PresentationModule {
 
     @PerActivity
     @Provides
-    JsonPlaceHolderApi provideJsonPlaceHolderApi(Retrofit retrofit){
-        return retrofit.create(JsonPlaceHolderApi.class);
-    }
-
-    @PerActivity
-    @Provides
-    IMainInteractor provideMainInteractor(JsonPlaceHolderApi jsonPlaceHolderApi,
+    //IMainInteractor provideMainInteractor(JsonPlaceHolderApi jsonPlaceHolderApi,
+    IMainInteractor provideMainInteractor(IPostRepository iPostRepository,
                                           @Named("ui_thread") Scheduler uiThread,
                                           @Named("executor_thread") Scheduler executorThread){
-        return new MainInteractorImpl(jsonPlaceHolderApi, uiThread, executorThread);
+        //return new MainInteractorImpl(jsonPlaceHolderApi, uiThread, executorThread);
+        return new MainInteractorImpl(iPostRepository, uiThread, executorThread);
     }
 
     @PerActivity
     @Provides
-    IPostDetailInteractor providePostDetailInteractor(JsonPlaceHolderApi jsonPlaceHolderApi,
+    IPostDetailInteractor providePostDetailInteractor(IPostRepository iPostRepository,
                                                       @Named("ui_thread") Scheduler uiThread,
                                                       @Named("executor_thread") Scheduler executorThread){
-        return new PostDetailInteractorImpl(jsonPlaceHolderApi,uiThread,executorThread);
+        return new PostDetailInteractorImpl(iPostRepository,uiThread,executorThread);
     }
 }

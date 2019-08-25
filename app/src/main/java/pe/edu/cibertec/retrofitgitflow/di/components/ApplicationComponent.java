@@ -13,7 +13,9 @@ import dagger.Component;
 import io.reactivex.Scheduler;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import pe.edu.cibertec.retrofitgitflow.data.repository.IPostRepository;
 import pe.edu.cibertec.retrofitgitflow.di.modules.ApplicationModule;
+import pe.edu.cibertec.retrofitgitflow.network.JsonPlaceHolderApi;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -23,7 +25,9 @@ public interface ApplicationComponent {
 
     Retrofit exposeRetrofit();
     Context exposeContext();
+    JsonPlaceHolderApi exposeJsonPlaceHolderApi();
     FirebaseAuth exposeFirebaseAuth();
+    IPostRepository exposePostRepository();
 
     @Named("ui_thread") Scheduler uiThread();
     @Named("executor_thread") Scheduler executorThread();
