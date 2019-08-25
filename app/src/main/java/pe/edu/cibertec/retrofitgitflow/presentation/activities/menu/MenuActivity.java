@@ -3,6 +3,12 @@ package pe.edu.cibertec.retrofitgitflow.presentation.activities.menu;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
+
+import javax.inject.Inject;
+
 import pe.edu.cibertec.retrofitgitflow.R;
 import pe.edu.cibertec.retrofitgitflow.base.BaseActivity;
 import pe.edu.cibertec.retrofitgitflow.di.components.DaggerPresentationComponent;
@@ -16,6 +22,9 @@ public class MenuActivity extends BaseActivity {
     Button rxJavaBasicButton;
     Button retrofitButton;
     Button firestoreButton;
+
+    @Inject
+    FirebaseRemoteConfig remoteConfig;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,5 +66,24 @@ public class MenuActivity extends BaseActivity {
             Intent intent = new Intent(getApplicationContext(), PostsFirestoreActivity.class);
             startActivity(intent);
         });
+    }
+
+    private void setRemoteConfig(){
+        FirebaseRemoteConfigSettings configSettings =
+                new FirebaseRemoteConfigSettings.Builder()
+                .setMinimumFetchIntervalInSeconds(20)
+                .build();
+        remoteConfig.setConfigSettingsAsync(configSettings);
+        remoteConfig.setDefaults(R.xml.remote_config);
+        remoteConfig.fetchAndActivate().addOnCompleteListener(task -> {
+            if (task.isSuccessful()){
+                updateToolBarTitle();
+            }
+        });
+        updateToolBarTitle();
+    }
+
+    private void updateToolBarTitle() {
+        setTitle(remoteConfig.getString("title"));
     }
 }

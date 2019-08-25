@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.storage.FirebaseStorage;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
@@ -121,4 +122,11 @@ public class ApplicationModule {
     FirebaseStorage provideStorage(){
         return FirebaseStorage.getInstance();
     }
+
+    @Provides
+    @Singleton
+    FirebaseRemoteConfig provideRemoteConfig(){
+        return FirebaseRemoteConfig.getInstance();
+    }
+
 }
